@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="redditClone">
+<head>
+	<meta charset="UTF-8">
+	
+
+	<title>Reddit Clone</title>
+
+	<!-- Link for Awesome Fonts -->
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css"/>
+
+	<!-- Link to Bootstrap for CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	
+	<!-- Angular -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular.js"></script>
+
+	<!-- Angular Animate -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.js"></script>
+
+	<!-- jQuery -->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+
+	<!-- ngRoute Module -->
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.js"></script>
+
+	<!-- Angular Module -->
+	<script type="text/javascript" src="js/app.js"></script>
+
+	<!-- Controllers -->
+	<script type="text/javascript" src="js/controllers.js"></script>
+
+	<!-- Bootstrap File -->
+	<script src="js/ui-bootstrap-tpls-0.13.3.min.js"></script>
+
+	<!-- Link to CSS -->
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<base href="/">
+</head>
+<body>
+    
+	<!-- All in use of the Show Post Controller -->
+	<div class="posting" ng-controller="showPosts">	
+    
+    <!-- Navigation -->
+	    <nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    
+	    <!-- Title -->
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="#">Reddit Clone</a>
+	    </div>
+
+	    <!-- Add A new Post or Search-->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <form class="navbar-form navbar-left" role="search">
+	        <Button type="button" ng-click="clicked=true" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Submit Post</Button>
+	        <div class="form-group">
+	          <input type="text" ng-model="searchText" placeholder="Search" class="form-control">
+	        </div>
+
+	        <!-- Order By -->
+	        <div class="form-group dropdown">
+	        	Sort By: <select name="" id="" ng-model="sortPosts" ng-init="sortPosts='title'">
+	        		<option value="votes">Votes</option>
+	        		<option value="title">Title</option>
+	        		<option value="date">Date</option>
+	        	</select>
+	        </div>
+
+	      </form>
+				
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+
+				<!-- New Post Form -->
+				<div ng-show="clicked" class="container">	
+					<form action="addPost" role="form" name="userForm" ng-submit="update(userForm.$valid,post)" novalidate>
+  					
+  					<!-- TITLE -->
+  					<div class="form-group" ng-class="{'has-error' : userForm.title.$invalid && !userForm.title.$pristine}">
+    					<label for="title"></label>
+    					<input type="text" name="title" ng-model="post.title" class="form-control" placeholder="Title" required>
+    					<p ng-show="userForm.title.$invalid && !userForm.title.$pristine" class="help-block">A title is required.</p>
+  					</div>
+  	
+  					<!-- AUTHOR -->
+  					<div class="form-group" ng-class="{'has-error' : userForm.author.$invalid && !userForm.author.$pristine}">
+    					<label for="author"></label>
+    					<input type="text" name="author" ng-model="post.author" class="form-control" placeholder="Author" required>
+    					<p ng-show="userForm.author.$invalid && !userForm.author.$pristine" class="help-block">An author is required.</p>
+  					</div>
+
+  					<!-- IMAGE -->
+  					<div class="form-group">
+    					<label for="imageUrl"></label>
+    					<input type="text" name="imageUrl" ng-model="post.imageUrl" class="form-control" placeholder="Image URL">
+  					</div>
+
+  					<!-- DESCRIPTION -->
+  					<div class="form-group" ng-class="{'has-error' : userForm.description.$invalid && !userForm.description.$pristine}">
+    					<label for="description"></label>
+    					<textarea type="text" name="description" ng-model="post.description" class="form-control" placeholder="Description" required></textarea>
+    					<p ng-show="userForm.description.$invalid && !userForm.description.$pristine" class="help-block">A description is required.</p>
+  					</div>
+  
+  					<!-- SUBMIT -->
+  					<button type="reset" value="Submit Post" ng-click="clicked=false; update(userForm.$valid, post)" class="btn btn-primary" ng-disabled="userForm.$invalid">Submit Post</button>
+  					
+  					<!-- CANCEL -->
+  					<button type="reset" ng-click="clicked=false;" class="btn btn-warning">Cancel</button>
+					
+					</form>
+				
+				</div>
+				<br>
+					
+	<!-- Posts -->
+	<div class="allPosts" ng-init="posts = [{title: 'Himeji Castle', author: 'John Asano', imageUrl: 'http://cdn.gaijinpot.com/wp-content/uploads/sites/4/2015/01/himeji-castle.jpg', description: 'Himeji Castle is one of Japan’s best preserved samurai castles and is a must see for any castle lover. The castle is fondly known as “Shirasagi-jo”, which means White Heron Castle in Japanese due to its brilliant white exterior and its resemblance to a heron taking flight. It was one of Japan’s first UNESCO World Heritage Sites when registered in 1993, and is one of the few original castles remaining in Japan from the samurai age.', votes: 0, date: '10:06 PM, Saturday, August 15, 2015'}, {title: 'North Korea threatens imminent strikes against South, warns US', author: 'Giles Hewitt', imageUrl: 'http://l2.yimg.com/bt/api/res/1.2/ai8OsS3AWYdJkG0arxmYRA--/YXBwaWQ9eW5ld3M7Zmk9ZmlsbDtoPTYxMjtpbD1wbGFuZTtweW9mZj0wO3E9NzU7dz05NjA-/http://media.zenfs.com/en_us/News/afp.com/Part-HKG-Hkg10201111-1-1-0.jpg', description: 'North Korea on Saturday threatened South Korea with indiscriminate military strikes unless it halts cross-border propaganda broadcasts, and issued fresh nuclear weapons warnings against the United States. The threats came amid escalating military tensions on the Korean peninsula following a landmine attack South Korea blamed on the North and ahead of a major South Korea-US joint military exercise condemned by Pyongyang.', votes: 0, date: '10:06 PM, Saturday, August 15, 2015'}, {title: 'China denounces Japan ministers Yasukuni shrine visits', author: 'Random Author', imageUrl: 'http://l2.yimg.com/bt/api/res/1.2/yPGiqf.COdbdnZRfNXp7jw--/YXBwaWQ9eW5ld3M7Zmk9ZmlsbDtoPTYzMztpbD1wbGFuZTtweW9mZj0wO3E9NzU7dz05NjA-/http://media.zenfs.com/en_us/News/afp.com/Part-HKG-Hkg10202620-1-1-0.jpg', description: 'China is Bacon ipsum dolor amet prosciutto flank spare ribs tenderloin, frankfurter beef ribs pork belly salami kevin biltong doner shoulder. Pig boudin cupim turducken, ground round brisket flank pork. Salami swine prosciutto landjaeger porchetta pastrami rump short loin kielbasa strip steak pig alcatra tri-tip biltong. Kielbasa sausage spare ribs pastrami, swine jowl filet mignon hamburger ham alcatra ham hock pork tail corned beef biltong. Porchetta short ribs capicola short loin, pork belly meatball flank alcatra boudin.', votes: 0, date: '10:06 PM, Saturday, August 15, 2015'}]">
+		<div class="container repeat-animation" ng-repeat="post in posts | filter:searchText | orderBy:sortPosts">
+	  <div class="well">
+	      <div class="media">
+	      	<a class="pull-left" href="#">
+	    			<IMG class="media-object" ng-src="{{post.imageUrl}}" height="110" width="110"></IMG>
+	  			</a>
+	  			<div class="media-body">
+	    			<h4 class="media-heading">{{post.title}} | <button class="glyphicon glyphicon-arrow-up votingButton" ng-model="like" ng-click="likes(post)"></button><button class="glyphicon glyphicon-arrow-down votingButton" ng-model="dislike" ng-click="dislikes(post)"></button><span ng-class="{votingColorGreen: post.votes > 0, votingColorRed: post.votes < 0}">{{post.votes}}</span></h4>
+	          <p class="text-right">By {{post.author}}</p>
+	          <p>{{post.description}}</p>
+	       		
+	       		<ul class="list-inline list-unstyled">
+	  					<li><span><i class="glyphicon glyphicon-calendar"></i> {{post.date | date : 'h:mm a, EEEE, MMMM d, y' }}</span></li>
+	            <li>|</li>
+	            	
+	            	<!-- Show Comment Button -->
+	            	<span ng-class="{'showComments' :commentHovering}" ng-mouseenter="commentHovering=true" ng-mouseleave="commentHovering=false" ng-click="showComment=true"><i class="glyphicon glyphicon-comment"></i><div style="display: inline;" ng-if="post.comments.length == undefined"> 0 comments</div> {{post.comments.length}} <ng-pluralize count="post.comments.length" when="{'1': 'comment', 'other': 'comments'}">
+									</ng-pluralize></span>
+	            <li>|</li>
+	            	
+	            	<!-- Add Comment Button -->
+	            	<span ng-class="{'commentButton' :hovering}" ng-mouseover="hovering=true" ng-mouseout="hovering=false" ng-click="commentClick=true"><i class="glyphicon glyphicon-pencil"></i> Add comment</span>
+	            
+						</ul>
+		     			<div class="allComments" ng-show="showComment">
+		     				<div ng-repeat="comment in post.comments track by $index">
+		     					<p><i>{{comment}}</i></p>
+		     				</div>
+		     				<button type="reset" ng-click="showComment=false" class="btn btn-warning">Hide</button>
+		     			</div>
+		     		</div>
+		    	</div>
+		  	</div>
+
+			<!-- New Comment Form -->
+					<div ng-show="commentClick" class="container">	
+						<form role="form" name="commentForm" novalidate>
+					
+						<!-- Add Comment -->
+				  	<div class="form-group" ng-class="{'has-error' : userForm.comment.$invalid && !userForm.comment.$pristine}">
+				    	<label for="title"></label>
+				    	<input type="text" name="comment" ng-model="comment" class="form-control" placeholder="Comment" required>
+				    	<p ng-show="userForm.comment.$invalid && !userForm.comment.$pristine" class="help-block">A comment is required.</p>
+				  	</div>
+
+				  	 <!-- SUBMIT -->
+				  	<button type="reset" value="submitPost" ng-click="commentClick=false; addComment(userForm.$valid, comment, post)" class="btn btn-primary" ng-disabled="userForm.$invalid"><i>Comment</i></button>
+				  					
+				  	<!-- CANCEL -->
+				  	<button type="reset" ng-click="commentClick=false;" class="btn btn-warning"><i>Cancel</i></button>
+						</form>
+					</div>
+					<br>
+
+
+			</div>
+		</div>
+		
+
+
+
+	</div> <!--This div ends the controller  -->
+
+<h1>NAVBAR</h1>
+
+
+<h1>Footer</h1>
+
+<div ng-controller="HomeController">
+	<div>{{name}}</div>
+</div>
+
+<div>
+	<a href="/">Home</a>
+	<a href="/dogs">Dogs</a>
+</div>
+
+<div ng-view></div>
+
+
+</body>
+
+<!-- What are possible issues with this new file structure? 
+	1. It makes the structure more complex and the models are not clearly defined.
+What are the differences between serving files from an http server and from the file system? It seemed to work fine with just open index.html in the browser... 
+	1. From a http server you can do ajax calls. -->
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<h1>Vanilla Javascript</h1>
+<br>
+
+<input type="text" placeholder="Name" id="name">
+	<script>
+		document.getElementById("name").onkeydown = function(event){
+			newname = this.value;
+			document.getElementById("add").innerHTML = "My name is: " + newname
+
+		}
+	</script>
+
+	<h1 id="add">My name is: </a></h1>
+</body>
+</html>

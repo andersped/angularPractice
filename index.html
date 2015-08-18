@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="firstApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular.js"></script>
+
+	<script src="app.js"></script>
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+<h1>Angular Practice</h1>
+<br>
+<h1><b><u>Part 1</u></b></h1>
+{{1 + 6}}
+<br>
+
+<input type="text" placeholder="What is your name?" ng-model="name" ng-init="name='Bojack'">
+<br>
+<h1>My name is: {{name}}</h1>
+<br>
+
+<h1><b><u>Part 2</u></b></h1>
+<select name="Select" id="" ng-model="animal">
+	<option value="Dogs">Dogs</option>
+	<option value="Cats">Cats</option>
+	<option value="Dogs & Cats">Dogs & Cats</option>
+	<option value="Neither">Neither</option>
+</select>
+<h1>I love {{animal}}</h1>
+<br>
+
+<h1><b><u>Part 3</u></b></h1>
+	<div class="container">
+		<div>1 + 2 = {{1+2}}</div>
+		<div>My name is {{"Bojack" + " Horseman"}}</div>
+		<div>The array [99,43,22] is {{[99,43,22].length}} items long.</div>
+	</div>
+	<br>
+	<div> {{3.14159265359 | currency:"&euro;"}} </div>
+	<br>
+	<br>
+	<div class="capitals">
+	<label for="">Please input text!</label>
+		<input type="text" ng-model="text">
+		<h2>Uppercase: {{text | uppercase}}</h2>
+		<h2>Lowercase: {{text | lowercase}}</h2>
+	</div>
+	<div class="roundingNumbers">
+		<div>{{3.14159265359 | number:3}} <p>Rounded By 3!</p></div>
+		<div>{{3.14159265359 | number:6}} <p>Rounded By 6!</p></div>
+		<div>{{3.14159265359 | number:1}} <p>Rounded by 1!</p></div>
+	</div>
+	<div class="roundingPi">
+		<div>How Many Digits Do You Want? 
+			<select name="pickDigits" id="" ng-model="digits" ng-init="digits=3">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+			</select>
+		</div>	
+		<div>Here you go! The first {{digits}} 
+			<ng-pluralize count="digits" when="{'1': 'digit', 'other': 'digits'} "> 
+			</ng-pluralize>
+			of pi!
+		</div>
+		<div>{{3.14159265359 | number:digits}}</div>
+	</div>
+	<br>
+	<br>
+	<div class="tipCalculator">
+		<h2>Tip Calculator!</h2>
+			<div>How much did your meal cost? <input type="number" ng-model="meal" placeholder="Enter Amount"></div>
+			<div>How much do you want to tip?
+				<select name="" id="" ng-model="tip" ng-init="tip='0'">
+					<option value="0">0%</option>
+					<option value=".1">10%</option>
+					<option value=".15">15%</option>
+					<option value=".2">20%</option>
+				</select>
+			</div>
+			<div><h3>Subtotal: {{meal | currency}}</h3></div>
+			<div><h3>Tip: {{meal * tip | currency}}</h3></div>
+	</div>
+	<div class="scopeExpression">18 * 22 - 5 + 3= {{18 * 22 - 5 + 3}}</div>
+	<br>
+	<br>
+	<h1><b><u>Part 4!</u></b></h1>
+	<br>
+	<br>
+	<div ng-controller="MyFirstController">
+		<h1>My name is: {{name}}</h1>
+		<input type="text" placeholder="What is your name">
+	</div>
+	<div ng-controller="ExercisesController">
+		<h2>My favorite color is: {{favColor}}</h2>
+		<h2>There are {{secondsInACentury | number : fractionSize}} seconds in a century!</h2>
+		<h2>The current date is {{rightNow | date : 'EEEE, MMMM d, y' }}</h2>
+	</div>
+	<br>
+	<br>
+	<h1><b><u>Part 5!</u></b></h1>
+	<br>
+	<div ng-controller="ngProperties">
+		<ul>
+			<li ng-repeat="name in names">
+				{{name}}
+			</li>
+		</ul>
+	</div>
+	<div ng-controller="ngProperties">
+		<ul>
+			<li ng-repeat="symbol in symbols" ng-bind-html-unsafe="symbol">
+				{{symbol}}
+			</li>
+		</ul>
+	</div>
+	<br>
+	<br>
+	<div ng-controller="ngProperties">
+		<ul>
+			<li ng-repeat="duplicate in duplicates track by $index">
+				{{duplicate}}
+			</li>
+		</ul>
+	</div>
+	<br>
+	<div class="showingNgStuff">
+		<div ng-show="3 + 4 == 5">
+			3 + 4 isn't 5, don't show
+		</div>
+		<div ng-show="3 + 4 == 7">
+			3 + 4 is 7, do show
+		</div>
+		<div ng-hide="3 + 4 == 5">
+			3 + 4 isn't 5, don't hide
+		</div>
+		<div ng-hide="3 + 4 == 7">
+			3 + 4 is 7, do hide
+		</div>
+	</div>
+	<br>
+	
+								<!-- Password Validation -->
+
+	<div class="passwordValidation">
+		<h2>Sign Up Page</h2>
+		<input type="password" name"password" ng-model="passwordInput" ng-init="passwordInput=''"><br>
+		
+		<div ng-class="{passNotValidates: passwordInput.length < 6}" ng-show="passwordInput.length < 6">Your password is {{passwordInput.length}} characters long</div>
+
+		<div ng-class="{passValidates: passwordInput.length >= 6}" ng-show="passwordInput.length >= 6">Your password is {{passwordInput.length}} characters long</div>
+		
+		<div ng-show="passwordInput.length < 6">
+			Password is Invalid
+		</div>
+		
+		<div ng-show="passwordInput.length >= 6">
+			<button>Sign Up!</button>
+		</div>
+	</div>
+	<br>
+	<br>
+	
+	<div ng-class="{highlight: 4 + 4 == 8}"> 4 + 4 = 8</div>
+	
+	<div ng-class="{highlight: 4 + 4 == 10}"> 4 + 4 = 10</div>
+
+	<br>
+
+
+									<!-- Camera Shop -->
+	
+	<div ng-controller="ngProperties">
+		
+		<h2><b>Camera Shop!</b></h2>
+		<select name="" id="" ng-model="cameraSort" ng-init="cameraSort='rating'">
+			<option value="rating">Rating</option>
+			<option value="price">Price</option>
+		</select>
+
+
+		<div ng-repeat="camera in cameras | orderBy: cameraSort">
+			<div class="container" ng-mouseenter="style='background-color: blue;'">	
+				<div>{{camera.title}}</div>
+				<div ng-class="{sale: {{camera.onSale}} == true}"><b>Price:</b> {{camera.price | currency}}
+					<div style="display: inline-block;" ng-show="{{camera.onSale}} == true">ON SALE!</div>
+				</div>
+				<div><b>Rating:</b> {{camera.rating}}</div>
+				<div><IMG ng-src="{{camera.image}}" height="12%" width="12%"></IMG></div>
+			</div>
+		</div>
+	
+	</div>
+
+
+	<h1><b><u>Part 5!</u></b></h1>
+	
+						<!-- Random Number -->
+	<div ng-controller="eventHandlers">	 
+	<h3>The number is: {{number}}</h3>	
+		<div>
+			<button ng-click="pickRandomNumber()">Pick Random Number</button>
+		</div>
+	</div>
+
+						<!-- Reverse Button -->
+	<div ng-controller="reverseButton">
+		<h2>Word Reverser</h2>
+		<input type="text" ng-model="wordEnter">
+		<h3>Your word is: {{wordEnter}}</h3>
+		<button ng-click="reverseWord()">reverse!</button>
+	</div>
+	<br>
+	<br>
+
+						<!-- Ping Pong Game -->
+	<h2 style="margin-left: 310px;"><b>PING PONG GAME!</b></h2>
+	<div ng-controller="pingPongGame">
+			<div class="pingPongBox1" style="background-color: {{playerOneColor}};" ng-click="playerOnePoint()">
+				<div class="player1">Player 1</div>
+				<div class="score1">{{playerOneScore}}</div>
+				<div class="serve1" ng-if="">Serving</div>
+			</div>
+			<div class="pingPongBox2" style="background-color: {{playerTwoColor}};" ng-click="playerTwoPoint()">
+				<div class="player2">Player 2</div>
+				<div class="score2">{{playerTwoScore}}</div>
+				<div class="serve2" ng-if="false">Serving</div>
+			</div>
+	
+	<br>
+	<br>
+		<button style="margin-left: 380px; font-size: 15px;" ng-click="resetScore()" ng-class="{'btnColor' :hovering}" ng-mouseenter="hovering=true" ng-mouseleave="hovering=false">RESET</button>
+	</div>
+	<br>
+	<br>
+
+							<!-- Contacts App -->
+	<h2><b>Contacts App</b></h2>
+	<div ng-controller="contactsApp">
+		<form name="form" novalidate>
+			
+			<label for="uName">Name:</label>
+			<input type="text" ng-model="user.name" name="uName">
+
+			
+			<label for="uEmail">Email:</label>
+			<input type="email" ng-model="user.email" name="uEmail">
+
+			<label for="uPhone">Phone:</label>
+			<input type="tel" ng-model="user.phone" name="uPhone">
+
+			<input type="Button" ng-click="update(user)" value="Submit" style="color: white; background-color: green;"/>
+
+			<br>
+
+			<label for="search">Search</label>
+			<input type="text" ng-model="searchText">
+		
+		</form>
+		<br>
+			<div class="contactlist" ng-init="master =[{name: 'Matt', email: 'matt@matt.com', phone: '123-456-1234'},
+			{name: 'John', email: 'john@john.com', phone: '123-234-1234'}, {name: 'Mary', email: 'mary@mary.com', phone: '555-555-5555'}, {name: 'Matt', email: 'matt@matt.com', phone: '123-456-1234'}, {name: 'Michael', email: 'michael@michael.com', phone: '999-999-9999'}]">
+				<table id="contactTable" style="width:100%">
+						<tr>
+							<td>Name</td>
+							<td>Email</td>
+							<td>Phone</td>
+						</tr>
+						<tr ng-repeat="user in master | filter:searchText">
+							<td>{{user.name}}</td>
+							<td>{{user.email}}</td>
+							<td>{{user.phone}}</td>
+						</tr>
+				</table>
+			</div>
+		</div>
+		<br>
+		<br>
+		<br>
+
+	</body>
+</body>
+</html>
