@@ -9,9 +9,14 @@ app.config(function($routeProvider, $locationProvider) {
       .when('/dogs', {
         templateUrl: 'partials/dogs.html',
         controller: 'DogsController'
+      })
+      .otherwise({ 
+        redirectTo:'/'
+        // Possibley need it to direct to /#/
       });
 
-      $locationProvider.html5Mode(true);
+      // HTML5 History API
+      $locationProvider.html5Mode(true)
 });
 
 
