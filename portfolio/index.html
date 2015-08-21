@@ -19,6 +19,9 @@
 	<!-- Angular Module -->
 	<script type="text/javascript" src="js/app.js"></script>
 
+	<!-- Angular Filters -->
+	<script type="text/javascript" src="js/filters.js"></script>
+
 	<!-- ngRoute Module -->
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.js"></script>
 
@@ -61,6 +64,43 @@
 </nav>
 <h2>Welcome to my Portfolio App</h2>
 
+<br>
+
+<div ng-controller="kebabController">
+	
+	<h4>Kebab Case</h4>
+	<p>{{test | kebab}}</p>
+	<p>{{number | kebab}}</p>
+	<br>
+	
+	<h4>Camel Case</h4>
+	<p>{{test | camel}}</p>
+	<p>{{number | camel}}</p>
+	<br>
+
+	<h4>PigLatin</h4>
+	<p>{{hello | pigLatin}}</p>
+	<p>{{please | pigLatin}}</p>
+	<p>{{number | pigLatin}}</p>
+	<br>
+
+	<h4>Word Interjection</h4>
+	<p>{{sentence | redact: "sentence"}}</p>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+
+	<div ng-controller="firstServiceController">
+		<h4><b>Words of Zen</b></h4>
+		<p><i>{{zenData}}</i></p>
+	</div>
+
+<br>
+<br>
+<br>
 <br>
 
 <div ng-view></div>

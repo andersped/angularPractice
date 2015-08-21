@@ -29,3 +29,18 @@ app.controller('divisionController', function($scope, $routeParams){
 
 	$scope.answer = x / y;
 })
+
+app.controller('kebabController', function($scope){
+	$scope.test = "Whatever_people";
+	$scope.number = 123
+	$scope.hello = "Hello"
+	$scope.please = "Please"
+	$scope.sentence = "This is a test sentence for interjection"
+})
+
+// Services
+app.controller('firstServiceController', function($scope, $http){
+	$http.get('https://api.github.com/zen').then(function(data){
+		$scope.zenData = data.data;
+	});
+});
