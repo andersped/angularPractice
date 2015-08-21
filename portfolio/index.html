@@ -66,6 +66,22 @@
 <div ng-view></div>
 
 
-	<!--  -->
+	<!--
+Why isn't ngRoute part of Angular core? Name at least 2 other Angular modules we could use?
+		1. So you can use angular in node, ruby or other in other frameworks for a single page app. 
+	
+Compare and contrast client-side routing with server-side routing
+		1. Client-side routing is used for single page apps where the page doesn't actually reload. 
+		2. Client-side routing loads the database all at once versus server side routing makes a call to the database everytime a new route is called. This makes it a bit slower overall.
+
+Aside from route definitions, what else can go in a .config()?
+		1. You can use providers, instances of services and a factory.
+
+What is $rootScope?
+		1. Its like the mothership of the scope and all other scopes are decendants of the $rootscope. Scopes provide separation between model and view. 
+
+What is the $routeChangeSuccess event?
+		1. $routeChangeSuccess Broadcasted after a route dependencies are resolved. ngView listens for the directive to instantiate the controller and render the view.
+		  -->
 </body>
 </html>
