@@ -13,6 +13,9 @@
 	<!-- Angular -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular.js"></script>
 
+	<!-- ngRoute Module -->
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.js"></script>
+
 	<!-- jQuery -->
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
 
@@ -21,9 +24,6 @@
 
 	<!-- Angular Filters -->
 	<script type="text/javascript" src="js/filters.js"></script>
-
-	<!-- ngRoute Module -->
-	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.js"></script>
 
 	<!-- Controllers -->
 	<script type="text/javascript" src="js/controllers.js"></script>
@@ -36,6 +36,8 @@
 
 	<!-- Keeps from the Routes going to /#/ -->
 <!-- 	<base href="/"> -->
+
+<!-- Group together 3rd party information, angluar and then app.js files  -->
 
 </head>
 <body>
@@ -96,6 +98,22 @@
 	<div ng-controller="firstServiceController">
 		<h4><b>Words of Zen</b></h4>
 		<p><i>{{zenData}}</i></p>
+		
+		<br>
+		<br>
+	</div>
+
+	<div ng-controller="itunesController">
+		<h4><b>Itunes Search</b></h4>
+		<div ng-repeat="results in result">
+			<p><b>Track Name: </b>{{results.trackName}}</p>
+		</div>
+	</div>
+	<br>
+	<br>
+	<div ng-controller="invalidUrlController">
+		<h4><b>Invalid Url</b></h4>
+		<p>{{invalidUrl}}</p>
 	</div>
 
 <br>
@@ -122,6 +140,19 @@ What is $rootScope?
 
 What is the $routeChangeSuccess event?
 		1. $routeChangeSuccess Broadcasted after a route dependencies are resolved. ngView listens for the directive to instantiate the controller and render the view.
+		  
+Describe what both the same origin policy and CORS are.
+		1. Same-origin policy restricts how a document or script is loaded from one origin can interact with a resource from another origin, its a security mechanism. If the pages don't have a different port, host or protocol, than it allows success. 
+		2. Cross-Site HTTP requests are HTTP requests for resources from a different domain than the domain of the resource making the request. This allows for the sharing of images, data, etc across the internet. 
+		 
+ITUNES SEARCH
+What was the error? Why did the api.github.com domain work and not the itunes.com domain?
+		1. XMLHttpRequest cannot load https://itunes.apple.com/search?term=jack+johnson. No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:8000' is therefore not allowed access.
+		2. It happens because it thinks it is malicious. Its so it can't read personal data on sites. It's also so that it cannot perform actions on behalf of the user. 
+		3. The github request worked because its a simple api and the itunes api has search terms in it so its thinking that its a malicious request.  		 
+
+Does Angular have any built-in functionality that could help you?**
+	1. There is a way to handle errors, basically after the $http.get() function, a second function is inserted that takes in a reponse which is the error. 
 		  -->
 </body>
 </html>

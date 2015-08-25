@@ -44,3 +44,31 @@ app.controller('firstServiceController', function($scope, $http){
 		$scope.zenData = data.data;
 	});
 });
+
+app.controller('itunesController', function($scope, $http){
+
+	$http.get('jsons/itunes.json').then(function(data){
+		// console.log(data.data.results);
+		
+		$scope.result = data.data.results
+		$scope.title = data.data.results[0]
+		console.log(data); 
+	});
+
+
+});
+
+app.controller('invalidUrlController', function($scope, $http){
+
+	$http.get('https://itunes.apple.com/search?term=jack+johnson').then(function(data){
+		$scope.invalidUrl = data
+
+	}, function(response){
+		alert("Sorry, your request can not be completed");
+
+	});
+
+})
+
+
+

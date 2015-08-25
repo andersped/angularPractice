@@ -32,6 +32,11 @@ app.config(function($routeProvider){
 			templateUrl: 'partials/division.html',
 			controller: 'divisionController'
 		})
+		// Tried this as a work around to http.get() not working
+		// .when('/itunes.json', {
+		// 	templateUrl: 'itunes.json',
+		// 	controller: 'firstServiceController'
+		// })
 		.otherwise({
 			redirectTo: '/'
 		});
