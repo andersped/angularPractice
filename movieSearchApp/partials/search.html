@@ -1,0 +1,26 @@
+<h2>Angular OMDb API Search</h2>
+
+<br>
+
+<h4>Enter a movie by title</h4>
+
+<div>	
+	<form action="" role="form" name="searchForm" ng-submit="update(search)">
+		<div class="form-group">
+			<label for="title"></label>
+				<input type="text" name="title" ng-model="search.title" placeholder="Title">
+		</div>
+
+		<div>
+			<button type="reset" value="Submit" class="btn btn-primary" ng-click="update(search)">Search</button>
+		</div>
+	</form>
+</div>
+
+<div ng-repeat="result in results">
+		<div>
+		<a href="#/{{result.imdbID}}/show">{{result.Title}}</a>
+		<br>
+		Year: {{result.Year}}
+		<div>
+</div>

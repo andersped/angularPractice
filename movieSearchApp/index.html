@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="movieSearch">
+<head>
+	<meta charset="UTF-8">
+	<title>Angular Movie Search</title>
+
+<!-- jQuery -->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+
+	<!-- Link to CSS -->
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<!-- Link to Bootstrap for CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<!-- Link for Awesome Fonts -->
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css"/>
+
+	<!-- Angular -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular.js"></script>
+
+	<!-- ngRoute Module -->
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.js"></script>
+
+	<!-- Angular Module -->
+	<script type="text/javascript" src="js/app.js"></script>
+
+	<!-- Angular Filters -->
+	<script type="text/javascript" src="js/filters.js"></script>
+
+	<!-- Controllers -->
+	<script type="text/javascript" src="js/controllers.js"></script>
+
+		<!-- Bootstrap File -->
+	<script src="js/ui-bootstrap-tpls-0.13.3.min.js"></script>
+
+</head>
+<body>
+
+<div ng-view></div>
+
+</body>
+
+<!-- 
+Look at an angular app you have made previous (reddit clone or your portfolio site). What dependencies are there? Where do you see dependencies other than the contoller?
+	1. In the portfolio site the dependencies used were $scope, $routeParams, $http, dependencies also exist in the module. The ones used were ui.boostarp and ngRoute. 
+
+In the above example (MathController) does the order of the dependencies matter? Does $scope have to come before $routeParams? Do the names matter? Could we name them something else?
+	1. The order of the dependencies does not matter as long as they are loaded into the function. The $scope does not have to come before $routeParams but its best practice.  
+	2. The names matter because there are built in services in angular. If we wanted to add our own dependency we would have to create a service for it. 
+
+In production code, you typically want your javascript file to be as small as possible so that it can be downloaded faster. To make the files smaller, developers minify their js files. Find a minification tool and minify your js code. Update your html file so that it now points to your newly minified js files. Does your angular app still work? If it stopped working, what is the problem?
+	1. The minifier I used was http://jscompress.com/. It worked fine when compressing my code that passes in the new post in the redit clone. 
+	
+So far we have mainly seen one way to do dependency injection. Research and figure out the other two ways. Which one is the best practice?
+	1. for dependency injection you can use myCtrl.$inject = [] or to put each dependencies into an array and then call them within the controller function. The best practice is using inline notation. The other ways are buggy and can cause problems when midifying.
+		1. Implicit annotation
+		2. Inline array annotation
+		3. $inject property annotation
+
+When using inline array annotation does the order of anything matter? What order should match?
+	1. The order that the list of strings are in the array have to match whats passed into the function. Annotation array in sync with parameters in the function declaration. 
+
+
+
+	 -->
+
+
+</html>

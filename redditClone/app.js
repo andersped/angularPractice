@@ -7,6 +7,8 @@ app.controller('showPosts', ['$scope', function($scope){
 	$scope.clicked = false;
 	$scope.like = 0
 
+	// $scope.update=function(e,t){console.log(t);var o={title:t.title,author:t.author,imageUrl:t.imageUrl,description:t.description,votes:0,date:$scope.postDate=new Date};$scope.posts.push(o)};
+
 		$scope.update = function(isValid, post){
 
 				console.log(post)
